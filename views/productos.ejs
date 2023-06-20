@@ -1,0 +1,25 @@
+<%- include ('layouts/header.ejs') -%>
+    <div class="text-center">
+        <h1 class="mt-3">Los Productos</h1>
+        <div class="d-flex flex-row flex-wrap w-100 justify-content-around text-center">
+            <!-- Leer la información de la DB -->
+            <% for(var i=0; i<Libros.length; i++){ %>
+                <div class="d-flex flex-item card rounded-5 overflow-hidden my-3" style="width: 18rem;">
+                    <img src='<%= Libros[i].imagen %>' class="card-img-top" alt="..." style="height: 15rem; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= Libros[i].titulo %>
+                        </h5>
+                        <p class="card-text">
+                            <%= Libros[i].descripcion %>
+                        </p>
+                        <p class="card-text">$<%= Libros[i].precio %></p>
+                        <a href="#" class="btn btn-success rounded-pill">Comprar</a>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+
+    <%- include ('layouts/footer.ejs') -%>

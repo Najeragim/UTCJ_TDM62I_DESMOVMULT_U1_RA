@@ -1,0 +1,120 @@
+<%- include ('layouts/header.ejs') -%>
+    <!-- Contenedor de tabla -->
+    <div class="d-flex flex-column text-center justify-content-center">
+        <h1>Registros</h1>
+        <table class="table table-stripped-columns table-hover w-75 m-auto">
+            <thead class="table-dark">
+                <th>ID</th>
+                <th>Título</th>
+                <th>Imagen</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Actualizar</th>
+                <th>Eliminar</th>
+            </thead>
+            <!-- Leer la información de la DB -->
+            <% for(var i=0; i<Libros.length; i++){ %>
+                <tr>
+                    <td>
+                        <%= Libros[i].ID %>
+                    </td>
+                    <td>
+                        <%= Libros[i].titulo %>
+                    </td>
+                    <td>
+                        <%= Libros[i].imagen %>
+                    </td>
+                    <td>
+                        <%= Libros[i].descripcion %>
+                    </td>
+                    <td>
+                        <%= Libros[i].precio %>
+                    </td>
+                    <td>
+                        <!-- Botón para actualizar - Abrir formulario -->
+                        <button type="button" class="btn btn-success rounded-pill px-4" onclick="mostrarFormulario('<%= Libros[i].ID %>',
+                            '<%= Libros[i].titulo %>', '<%= Libros[i].imagen %>', 
+                            '<%= Libros[i].descripcion %>', '<%= Libros[i].precio %>')">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <!--Formulario eliminar el registro por ID -->
+                        <form action="/eliminar/<%= Libros[i].ID %>" method="POST">
+                            <button type="submit" class="btn btn-danger rounded-pill px-4">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+
+    </div>
+
+    <div class=" d-flex w-100 justify-content-center">
+        <hr class="my-4" width="90%">
+    </div>
+
+    <div class="d-flex flex-row justify-content-center ">
+        <!-- Formulario Actualizar -->
+        <form id="frm_actualizar" action="/actualizar" method="POST" style="display: none;" class="w-25 m-auto">
+            <!-- ID -->
+            <label for="act_ID" class="form-label w-100">ID:</label>
+            <input type="text" id="act_ID" name="ID" required class="w-100 form-control" disabled readonly>
+            <!-- Título -->
+            <label for="act_titulo" class="form-label w-100">Título:</label>
+            <input type="text" id="act_titulo" name="titulo" required class="w-100 form-control">
+            <!-- Imagen -->
+            <label for="act_imagen" class="form-label w-100">Imagen (URL):</label>
+            <input type="text" id="act_imagen" name="imagen" required class="w-100 form-control">
+            <!-- Descripcion -->
+            <label for="act_descripcion" class="form-label w-100">Descripción:</label>
+            <input type="text" id="act_descripcion" name="descripcion" required class="w-100 form-control">
+            <!-- Precio -->
+            <label for="act_precio" class="form-label w-100">Precio:</label>
+            <input type="number" step=".01" id="act_precio" name="precio" required class="w-100 form-control">
+            <!-- Botón -->
+            <button type="submit" class="btn btn-warning rounded-pill my-4 w-100">Actualizar</button>
+        </form>
+
+        <!-- Separador de los dos formularios -->
+        <hr id="separador" class="mx-5" width="1px" height="100%"
+            style="border:none; border-left: 1px solid hsla(200, 10%, 50%,100); display: none;">
+
+        <!-- Formulario Insertar -->
+        <form id="frm_insertar" action="/insertar" method="POST" class="w-25 m-auto">
+            <!-- Título -->
+            <label for="ins_titulo" class="form-label w-100">Título:</label>
+            <input type="text" id="ins_titulo" name="ins_titulo" required class="w-100 form-control">
+            <!-- Imagen -->
+            <label for="ins_imagen" class="form-label w-100">Imagen (URL):</label>
+            <input type="text" id="ins_imagen" name="ins_imagen" required class="w-100 form-control">
+            <!-- Descripcion -->
+            <label for="ins_descripcion" class="form-label w-100">Descripción:</label>
+            <input type="text" id="ins_descripcion" name="ins_descripcion" required class="w-100 form-control">
+            <!-- Precio -->
+            <label for="ins_precio" class="form-label w-100">Precio:</label>
+            <input type="number" step=".01" id="ins_precio" name="ins_precio" required class="w-100 form-control">
+            <!-- Botón -->
+            <button type="submit" class="btn btn-primary rounded-pill my-4 w-100">Insertar</button>
+        </form>
+    </div>
+    <script>
+        function mostrarFormulario(id, titulo, imagen, descripcion, precio) {
+            // Llenar el formulario con los datos
+            document.getElementById("act_ID").value = id;
+            document.getElementById("act_titulo").value = titulo;
+            document.getElementById("act_imagen").value = imagen;
+            document.getElementById("act_descripcion").value = descripcion;
+            document.getElementById("act_precio").value = precio;
+
+            //Actualizar el action del formulario para que se envíe según el ID especificado
+            document.getElementById("frm_actualizar").setAttribute('action', '/actualizar/' + document.getElementById("act_ID").value);
+            // Mostrar el formulario
+            document.getElementById("frm_actualizar").style.display = "block";
+            document.getElementById("separador").style.display = "block";
+        }
+    </script>
+    <%- include ('layouts/footer.ejs') -%>
