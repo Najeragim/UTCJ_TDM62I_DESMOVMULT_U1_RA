@@ -19,9 +19,3 @@ connection.connect(
 );
 
 module.exports = connection;
-
-/*connection.query("SELECT * FROM tbl_productos", function(err, resultado){
-    console.log(resultado);
-});
-
-connection.end();*/

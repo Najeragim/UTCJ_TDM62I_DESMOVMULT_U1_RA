@@ -5,7 +5,9 @@
             <!-- Leer la información de la DB -->
             <% for(var i=0; i<Libros.length; i++){ %>
                 <div class="d-flex flex-item card rounded-5 overflow-hidden my-3" style="width: 18rem;">
+                    <!-- Imagen del producto -->
                     <img src='<%= Libros[i].imagen %>' class="card-img-top" alt="..." style="height: 15rem; object-fit: cover;">
+                    <!-- Cuerpo de los textos de la tarjeta -->
                     <div class="card-body">
                         <h5 class="card-title">
                             <%= Libros[i].titulo %>

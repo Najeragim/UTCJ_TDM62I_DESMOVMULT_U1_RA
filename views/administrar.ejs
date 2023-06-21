@@ -3,6 +3,7 @@
     <div class="d-flex flex-column text-center justify-content-center">
         <h1>Registros</h1>
         <table class="table table-stripped-columns table-hover w-75 m-auto">
+            <!-- Cabecera de tabla -->
             <thead class="table-dark">
                 <th>ID</th>
                 <th>Título</th>
@@ -12,7 +13,7 @@
                 <th>Actualizar</th>
                 <th>Eliminar</th>
             </thead>
-            <!-- Leer la información de la DB -->
+            <!-- Leer la información de la BD -->
             <% for(var i=0; i<Libros.length; i++){ %>
                 <tr>
                     <td>
@@ -53,6 +54,7 @@
 
     </div>
 
+    <!-- Separador -->
     <div class=" d-flex w-100 justify-content-center">
         <hr class="my-4" width="90%">
     </div>
@@ -101,6 +103,7 @@
             <button type="submit" class="btn btn-primary rounded-pill my-4 w-100">Insertar</button>
         </form>
     </div>
+    <!-- Código de JavaScript -->
     <script>
         function mostrarFormulario(id, titulo, imagen, descripcion, precio) {
             // Llenar el formulario con los datos
